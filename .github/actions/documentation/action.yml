@@ -10,7 +10,8 @@ runs:
           # We only make check, not changes
           DOX_CONF_FILE=$(pwd)/Doxyfile
 
-          # ToDo: Add documentation about this command and describe better
+          #here is generated the configuration than is going to be written to the DOX_CONF_FILE adding 
+          #to what already exists the directories that work as inputs (/src /include /lib)
           {
               cat $DOX_CONF_FILE
               echo "INPUT" = $(pwd)/src $(pwd)/include $(pwd)/lib
@@ -22,7 +23,8 @@ runs:
 
           ERROR_FILE_FLAG=$(pwd)/dox_errors.txt
 
-          # ToDo: Add documentation and describe better this command
+          # We first execute doxygen with the DOX_CONF_FILE configurations in silent mode (-s) and
+          #then redirects the output to the ERROR_FILE_FLAG file
           DOXYGEN_COMMAND=$(doxygen -s $DOX_CONF_FILE) > $ERROR_FILE_FLAG
 
           if [ -s $ERROR_FILE_FLAG ]; then
